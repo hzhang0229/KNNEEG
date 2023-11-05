@@ -4,7 +4,7 @@
 ## Overview
 KNN-EEGViT is an adapted version of EEGViT, which is a hybrid Vision Transformer (ViT) incorporated with Depthwise Convolution in patch embedding layers. We add the KNN-attention feature to the EEGVit model and expect the boost of model performance and accuracy on EEGEyeNet benchmarking tasks.
 
-
+Original EEGVit:https://github.com/ruiqiRichard/EEGViT.git
 ## Dataset download
 Download data for EEGEyeNet absolute position task
 ```bash
