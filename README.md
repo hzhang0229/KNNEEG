@@ -15,7 +15,12 @@ Download data for EEGEyeNet absolute position task
 wget -O "./dataset/Position_task_with_dots_synchronised_min.npz" "https://osf.io/download/ge87t/"
 ```
 
-## Installation
+## Pip Installation
+Just in case you are using VM without pip. 
+```bash
+sudo apt update
+sudo apt install python3-pip
+```
 
 ### Requirements
 
