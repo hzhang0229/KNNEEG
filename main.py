@@ -48,7 +48,7 @@ def train(model, optimizer, scheduler = None):
         device = torch.device("cpu")
     if torch.cuda.device_count() > 1:
         model = nn.DataParallel(model)  # Wrap the model with DataParallel
-    print("HI")
+    print("Hi")
 
     model = model.to(device)
 
@@ -61,16 +61,17 @@ def train(model, optimizer, scheduler = None):
     train_losses = []
     val_losses = []
     test_losses = []
-    print('training...')
+    print('Training...')
     # Train the model
     for epoch in range(n_epoch):
+        print('Training Now!')
         model.train()
         epoch_train_loss = 0.0
 
         for i, (inputs, targets, index) in tqdm(enumerate(train_loader)):
             # Move the inputs and targets to the GPU (if available)
-            inputs = inputs.to(device)
-            targets = targets.to(device)
+            #inputs = inputs.to(device)
+            #targets = targets.to(device)
 
             # Compute the outputs and loss for the current batch
             optimizer.zero_grad()
@@ -95,8 +96,9 @@ def train(model, optimizer, scheduler = None):
             val_loss = 0.0
             for inputs, targets, index in val_loader:
                 # Move the inputs and targets to the GPU (if available)
-                inputs = inputs.to(device)
-                targets = targets.to(device)
+                
+                #inputs = inputs.to(device)
+                #targets = targets.to(device)
 
                 # Compute the outputs and loss for the current batch
                 outputs = model(inputs)
@@ -114,8 +116,8 @@ def train(model, optimizer, scheduler = None):
             val_loss = 0.0
             for inputs, targets, index in test_loader:
                 # Move the inputs and targets to the GPU (if available)
-                inputs = inputs.to(device)
-                targets = targets.to(device)
+                #inputs = inputs.to(device)
+                #targets = targets.to(device)
 
                 # Compute the outputs and loss for the current batch
                 outputs = model(inputs)
