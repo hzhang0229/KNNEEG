@@ -41,7 +41,7 @@ def train(model, optimizer, scheduler = None):
     test_loader = DataLoader(test, batch_size=batch_size)
 
     if torch.cuda.is_available():
-        print(‘Using GPU)
+        print("Using GPU")
         gpu_id = 0  # Change this to the desired GPU ID if you have multiple GPUs
         torch.cuda.set_device(gpu_id)
         device = torch.device(f"cuda:{gpu_id}")
