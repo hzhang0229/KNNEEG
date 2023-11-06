@@ -46,4 +46,5 @@ python3 main.py
 python 3.8.10
 NVIDIA T4 GPU
 ×86/64 Architecture
-4 vCPUs with 15GB Memory
+8 vCPUs with 32GB Memory
+32GB is the minimum memory requirement for this program.

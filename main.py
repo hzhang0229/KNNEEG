@@ -10,7 +10,7 @@ from models.KNNViT import KNNEEG
 '''
 models: EEGViT_pretrained; EEGViT_raw; ViTBase; ViTBase_pretrained
 '''
-model = EEGViT_raw()
+model = KNNEEG()
 EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
 batch_size = 64
 n_epoch = 15
@@ -70,8 +70,8 @@ def train(model, optimizer, scheduler = None):
 
         for i, (inputs, targets, index) in tqdm(enumerate(train_loader)):
             # Move the inputs and targets to the GPU (if available)
-            #inputs = inputs.to(device)
-            #targets = targets.to(device)
+            inputs = inputs.to(device)
+            targets = targets.to(device)
 
             # Compute the outputs and loss for the current batch
             optimizer.zero_grad()
@@ -97,8 +97,8 @@ def train(model, optimizer, scheduler = None):
             for inputs, targets, index in val_loader:
                 # Move the inputs and targets to the GPU (if available)
                 
-                #inputs = inputs.to(device)
-                #targets = targets.to(device)
+                inputs = inputs.to(device)
+                targets = targets.to(device)
 
                 # Compute the outputs and loss for the current batch
                 outputs = model(inputs)
@@ -116,8 +116,8 @@ def train(model, optimizer, scheduler = None):
             val_loss = 0.0
             for inputs, targets, index in test_loader:
                 # Move the inputs and targets to the GPU (if available)
-                #inputs = inputs.to(device)
-                #targets = targets.to(device)
+                inputs = inputs.to(device)
+                targets = targets.to(device)
 
                 # Compute the outputs and loss for the current batch
                 outputs = model(inputs)
