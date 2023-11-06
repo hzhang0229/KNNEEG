@@ -22,7 +22,7 @@ sudo apt update
 sudo apt install python3-pip
 ```
 
-### Requirements
+## Requirements
 
 First install the general_requirements.txt
 
@@ -31,12 +31,14 @@ pip3 install -r general_requirements.txt
 ```
 We do suggest install each item listed in this txt. file individually because our research shows the above instruction is not working. We will fix this issue soon.
 
-### Pytorch Requirements
+## Pytorch Requirements
 
 ```bash
 pip install torch torchvision torchaudio
 ```
 
+## Run the program
 
-
-# KNNEEG
+```bash
+python3 main.py
+```
