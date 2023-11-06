@@ -42,3 +42,8 @@ pip install torch torchvision torchaudio
 ```bash
 python3 main.py
 ```
+## Environment
+python 3.8.10
+NVIDIA T4 GPU
+×86/64 Architecture
+4 vCPUs with 15GB Memory
