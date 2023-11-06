@@ -29,7 +29,7 @@ First install the general_requirements.txt
 ```bash
 pip3 install -r general_requirements.txt 
 ```
-We do suggest install each item listed in this txt. file individually because our research shows the above instruction is not working. We will fix this issue soon.
+We do suggest install each item listed in this txt. file individually just in case our research shows the above instruction is not working. 
 
 ## Pytorch Requirements
 
@@ -43,8 +43,13 @@ pip install torch torchvision torchaudio
 python3 main.py
 ```
 ## Environment
+```bash
 python 3.8.10
 NVIDIA T4 GPU
 ×86/64 Architecture
 8 vCPUs with 32GB Memory
 32GB is the minimum memory requirement for this program.
+```
+## Common Problems
+1. If you have a NVIDIA GPU but the system prints "Using CPU", Please check if you have the GPU Driver. 
+https://cloud.google.com/compute/docs/gpus/install-grid-drivers#install-drivers
