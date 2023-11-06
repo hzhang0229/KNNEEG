@@ -1,4 +1,3 @@
-from models.EEGViT_pretrained import EEGViT_pretrained
 from models.EEGViT import EEGViT_raw
 from helper_functions import split
 from dataset.EEGEyeNet import EEGEyeNetDataset
@@ -7,14 +6,14 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, Subset
 from tqdm import tqdm
 import numpy as np
-
+from models.KNNViT import KNNEEG
 '''
 models: EEGViT_pretrained; EEGViT_raw; ViTBase; ViTBase_pretrained
 '''
-model = EEGViT_pretrained()
+model = KNNEEG()
 EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
 batch_size = 64
-n_epoch = 10
+n_epoch = 15
 learning_rate = 1e-4
 
 criterion = nn.MSELoss()
