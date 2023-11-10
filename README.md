@@ -4,7 +4,7 @@
 ## Overview
 KNN-EEGViT is an adapted version of EEGViT, which is a hybrid Vision Transformer (ViT) incorporated with Depthwise Convolution in patch embedding layers. We add the KNN-attention feature to the EEGVit model and expect the boost of model performance and accuracy on EEGEyeNet benchmarking tasks.
 
-Original EEGVit:https://github.com/ruiqiRichard/EEGViT.git
+Original EEGViT:https://github.com/ruiqiRichard/EEGViT.git
 ## Code download
 ```bash
 git clone https://github.com/hzhang0229/KNNEEG.git
@@ -42,14 +42,19 @@ pip install torch torchvision torchaudio
 ```bash
 python3 main.py
 ```
-## Environment
+## Suggested Environment for Reproducibility
 ```bash
 python 3.8.10
+Google Cloud VM
 NVIDIA T4 GPU
 ×86/64 Architecture
 8 vCPUs with 32GB Memory
 32GB is the minimum memory requirement for this program.
 ```
-## Common Problems
+## Common Problems and Troubleshooting
 1. If you have a NVIDIA GPU but the system prints "Using CPU", Please check if you have the GPU Driver. 
 https://cloud.google.com/compute/docs/gpus/install-grid-drivers#install-drivers
+2. Please ensure you have enough memory on your VM to download the dataset, which is around 11 GB. 
+
+## Contributing
+If you are interested and want to contribute to our model, please email xxx@gmail.com.

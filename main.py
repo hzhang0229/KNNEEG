@@ -8,7 +8,14 @@ from tqdm import tqdm
 import numpy as np
 from models.KNNViT import KNNEEG
 '''
-models: EEGViT_pretrained; EEGViT_raw; ViTBase; ViTBase_pretrained
+Models: EEGViT_raw; KNNEEG
+We have used the model from https://github.com/ruiqiRichard/EEGViT.git
+and adapted the attention feature from https://github.com/damo-cv/KVT.git
+
+We thank the github community for their contribution.
+We thank Google Cloud for providing GPUs and free credit.
+
+
 '''
 model = KNNEEG()
 EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
@@ -63,10 +70,10 @@ def train(model, optimizer, scheduler = None):
     train_losses = []
     val_losses = []
     test_losses = []
-    print('Training...')
+    print('Training Started')
     # Train the model
     for epoch in range(n_epoch):
-        print('Training Now!')
+        print('New Epoch!')
         model.train()
         epoch_train_loss = 0.0
 
