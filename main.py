@@ -17,7 +17,7 @@ We thank Google Cloud for providing GPUs and free credit.
 
 
 '''
-model = KNNEEG()
+model = EEGViT_raw()
 EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
 batch_size = 64
 n_epoch = 15

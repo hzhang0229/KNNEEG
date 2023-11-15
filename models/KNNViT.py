@@ -4,7 +4,10 @@ import transformers
 import torch
 import torch.nn as nn
 
-# The KNN Attention class from https://github.com/damo-cv/KVT.git
+"""
+This is the initial KNNViT model, which proves its capability to be applied on ET problems. 
+Note that this model will be changed later for better performance.
+"""
 
 class kNNAttention(nn.Module):
     def __init__(self, dim, num_heads=8, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.,topk=100):
