@@ -276,7 +276,7 @@ def vit_base_patch16_224_in21k(pretrained=False, **kwargs):
     ImageNet-21k weights @ 224x224, source https://github.com/google-research/vision_transformer.
     """
     model_kwargs = dict(
-        patch_size=(1,100), embed_dim=768, depth=12, num_heads=12, representation_size=768, **kwargs)
+        patch_size=(1,250), embed_dim=768, depth=12, num_heads=12, representation_size=768, **kwargs)
     model = _create_vision_transformer('vit_base_patch16_224_in21k', pretrained=pretrained, **model_kwargs)
 
 
