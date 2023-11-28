@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader, Subset
 from tqdm import tqdm
 import numpy as np
 from models.KNNViT import KNNEEG
+from models.KNN import returnmodel
 '''
 Models: EEGViT_raw; KNNEEG
 We have used the model from https://github.com/ruiqiRichard/EEGViT.git
@@ -17,7 +18,35 @@ We thank Google Cloud for providing GPUs and free credit.
 
 
 '''
-model = EEGViT_raw()
+
+import argparse
+import datetime
+import numpy as np
+import time
+import torch
+import torch.backends.cudnn as cudnn
+import json
+
+from pathlib import Path
+
+from timm.data import Mixup
+from timm.models import create_model
+from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
+from timm.scheduler import create_scheduler
+from timm.optim import create_optimizer
+from timm.utils import NativeScaler, get_state_dict, ModelEma
+
+
+
+
+if torch.backends.mps.is_available():
+    mps_device = torch.device("mps")
+    x = torch.ones(1, device=mps_device)
+    print(x)
+else:
+    print ("MPS device not found.")
+
+model = returnmodel()
 EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
 batch_size = 64
 n_epoch = 15
@@ -61,6 +90,8 @@ def train(model, optimizer, scheduler = None):
 
     model = model.to(device)
 
+
+
     # Added because "UnboundLocalError: local variable 'criterion' referenced before assignment"
     criterion = nn.MSELoss()
 
@@ -93,8 +124,8 @@ def train(model, optimizer, scheduler = None):
             epoch_train_loss += loss.item()
 
             # Print the loss and accuracy for the current batch
-            if i % 100 == 0:
-                print(f"Epoch {epoch}, Batch {i}, Loss: {loss.item()}")
+
+            print(f"Epoch {epoch}, Batch {i}, Loss: {loss.item()}")
 
         epoch_train_loss /= len(train_loader)
         train_losses.append(epoch_train_loss)
@@ -141,6 +172,8 @@ def train(model, optimizer, scheduler = None):
 
         if scheduler is not None:
             scheduler.step()
+            
 
+            
 if __name__ == "__main__":
     train(model,optimizer=optimizer, scheduler=scheduler)
