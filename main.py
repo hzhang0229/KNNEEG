@@ -124,8 +124,8 @@ def train(model, optimizer, scheduler = None):
             epoch_train_loss += loss.item()
 
             # Print the loss and accuracy for the current batch
-
-            print(f"Epoch {epoch}, Batch {i}, Loss: {loss.item()}")
+            if i % 100 == 0:
+                print(f"Epoch {epoch}, Batch {i}, Loss: {loss.item()}")
 
         epoch_train_loss /= len(train_loader)
         train_losses.append(epoch_train_loss)
