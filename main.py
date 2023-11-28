@@ -55,7 +55,7 @@ learning_rate = 1e-3
 criterion = nn.MSELoss()
 
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=6, gamma=0.1)
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2, gamma=0.5)
 
 
 def train(model, optimizer, scheduler = None):
