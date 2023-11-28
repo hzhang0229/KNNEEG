@@ -34,7 +34,7 @@ class Mlp(nn.Module):
 
 
 class kNNAttention(nn.Module):
-    def __init__(self, dim, num_heads=12, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.,topk=50):
+    def __init__(self, dim, num_heads=12, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.,topk=140):
         super().__init__()
         self.num_heads = num_heads
         head_dim = dim // num_heads
@@ -113,11 +113,7 @@ class PatchEmbed(nn.Module):
 
 
 class VisionTransformer(nn.Module):
-    """ Vision Transformer
 
-    A PyTorch impl of : `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale`  -
-        https://arxiv.org/abs/2010.11929
-    """
     def __init__(self, img_size=(129,500), patch_size=(8,1), in_chans=1, num_classes=1, embed_dim=768, depth=12,
                  num_heads=12, mlp_ratio=4., qkv_bias=True, qk_scale=None, representation_size=None,
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0., hybrid_backbone=None, norm_layer=None):
@@ -154,30 +150,6 @@ class VisionTransformer(nn.Module):
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, embed_dim))
         self.pos_drop = nn.Dropout(p=drop_rate)
 
-        '''self.conv1 = nn.Conv2d(
-            in_channels=1, 
-            out_channels=256,
-            kernel_size=(1, 36),
-            stride=(1, 36),
-            padding=(0,2),
-            bias=False
-        )
-        self.batchnorm1 = nn.BatchNorm2d(256, False)
-        '''
-
-        self.config = transformers.ViTConfig(
-            hidden_size=768,
-            num_hidden_layers=12,
-            intermediate_size=3072,
-            hidden_dropout_prob=0.1,
-            attention_probs_dropout_prob=0.1,
-            initializer_range=0.02,
-            num_channels=1,
-            image_size=(129,500),
-            patch_size=(8,1)
-        )
-        self.model = ViTModel(self.config)
-
         dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]  # stochastic depth decay rule
         self.blocks = nn.ModuleList([
             Block(
@@ -212,16 +184,6 @@ class VisionTransformer(nn.Module):
             nn.init.constant_(m.bias, 0)
             nn.init.constant_(m.weight, 1.0)
 
-    @torch.jit.ignore
-    def no_weight_decay(self):
-        return {'pos_embed', 'cls_token'}
-
-    def get_classifier(self):
-        return self.head
-
-    def reset_classifier(self, num_classes, global_pool=''):
-        self.num_classes = num_classes
-        self.head = nn.Linear(self.embed_dim, num_classes) if num_classes > 0 else nn.Identity()
 
     def forward_features(self, x):
         B = x.shape[0]
@@ -246,11 +208,11 @@ class VisionTransformer(nn.Module):
         x = self.norm(x)[:, 0]
         x = self.pre_logits(x)
         return x
+    
     def forward(self, x):
         x = self.forward_features(x)
         x = self.head(x)
         return x
-
 
 
 

@@ -3,7 +3,6 @@ import transformers
 from transformers import ViTModel
 import torch
 from torch import nn
-import transformers
 
 class EEGViT_raw(nn.Module):
     def __init__(self):

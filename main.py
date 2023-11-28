@@ -6,7 +6,6 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, Subset
 from tqdm import tqdm
 import numpy as np
-from models.KNNViT import KNNEEG
 from models.KNN import returnmodel
 '''
 Models: EEGViT_raw; KNNEEG
