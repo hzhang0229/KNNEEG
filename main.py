@@ -25,6 +25,7 @@ import time
 import torch
 import torch.backends.cudnn as cudnn
 import json
+import sys
 
 from pathlib import Path
 
@@ -36,6 +37,13 @@ from timm.optim import create_optimizer
 from timm.utils import NativeScaler, get_state_dict, ModelEma
 
 
+# Open the file where you want to redirect the output
+with open("result.txt", "w") as file:
+    # Save the current stdout so that we can revert back to it later
+    original_stdout = sys.stdout
+
+    # Set the stdout to the file object
+    sys.stdout = file
 
 
 if torch.backends.mps.is_available():
