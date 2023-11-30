@@ -46,7 +46,7 @@ else:
     print ("MPS device not found.")
 
 model = returnmodel()
-EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
+EEGEyeNet = EEGEyeNetDataset('./dataset/LR_task_with_antisaccade_synchronised_min.npz')
 batch_size = 64
 n_epoch = 15
 learning_rate = 1e-3
