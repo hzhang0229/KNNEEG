@@ -1,6 +1,9 @@
+# This file is directly from the EEGViT code as https://github.com/ruiqiRichard/EEGViT.git.
+
 from torch.utils.data import Dataset
 import torch
 import numpy as np
+import math
 
 class EEGEyeNetDataset(Dataset):
     def __init__(self, data_file,transpose = True):
@@ -23,3 +26,5 @@ class EEGEyeNetDataset(Dataset):
     def __len__(self):
         # Compute the number of samples in the data array
         return len(self.trainX)
+
+

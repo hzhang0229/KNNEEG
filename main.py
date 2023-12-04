@@ -1,11 +1,11 @@
 from models.EEGViT import EEGViT_raw
-from helper_functions import split
 from dataset.EEGEyeNet import EEGEyeNetDataset
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, Subset
 from tqdm import tqdm
 import numpy as np
+import math
 from models.KNN import returnmodel
 '''
 Models: EEGViT_raw; KNNEEG
@@ -36,6 +36,22 @@ from timm.scheduler import create_scheduler
 from timm.optim import create_optimizer
 from timm.utils import NativeScaler, get_state_dict, ModelEma
 
+def split(ids, train, val, test):
+    # proportions of train, val, test
+    assert (train+val+test == 1)
+    IDs = np.unique(ids)
+    num_ids = len(IDs)
+
+    # priority given to the test/val sets
+    test_split = math.ceil(test * num_ids)
+    val_split = math.ceil(val * num_ids)
+    train_split = num_ids - val_split - test_split
+
+    train = np.where(np.isin(ids, IDs[:train_split]))[0]
+    val = np.where(np.isin(ids, IDs[train_split:train_split+val_split]))[0]
+    test = np.where(np.isin(ids, IDs[train_split+val_split:]))[0]
+    
+    return train, val, test
 
 
 if torch.backends.mps.is_available():
@@ -46,7 +62,8 @@ else:
     print ("MPS device not found.")
 
 model = returnmodel()
-EEGEyeNet = EEGEyeNetDataset('./dataset/LR_task_with_antisaccade_synchronised_min.npz')
+# EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
+EEGEyeNet = EEGEyeNetDataset('./dataset/Position_task_with_dots_synchronised_min.npz')
 batch_size = 64
 n_epoch = 15
 learning_rate = 1e-3
@@ -92,7 +109,7 @@ def train(model, optimizer, scheduler = None):
 
 
     # Added because "UnboundLocalError: local variable 'criterion' referenced before assignment"
-    criterion = nn.MSELoss()
+    criterion = nn.L1Loss()
 
     criterion = criterion.to(device)
 

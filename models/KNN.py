@@ -1,3 +1,8 @@
+"""
+This work extends the work of KVT as https://github.com/damo-cv/KVT.git
+"""
+
+
 import math
 import logging
 from functools import partial
@@ -34,7 +39,7 @@ class Mlp(nn.Module):
 
 
 class kNNAttention(nn.Module):
-    def __init__(self, dim, num_heads=12, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.,topk=10):
+    def __init__(self, dim, num_heads=12, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.,topk=100):
         super().__init__()
         self.num_heads = num_heads
         head_dim = dim // num_heads

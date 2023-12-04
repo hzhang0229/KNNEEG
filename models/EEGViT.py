@@ -1,11 +1,16 @@
+"""
+This is directly from the work of https://github.com/ruiqiRichard/EEGViT.git
+"""
+
 import torch
 import transformers
 from transformers import ViTModel
 import torch
 from torch import nn
+import transformers
 
 class EEGViT_raw(nn.Module):
-    def __init__(self):
+    def __init__(self, ViTLayers):
         super().__init__()
         self.conv1 = nn.Conv2d(
             in_channels=1, 
@@ -40,8 +45,3 @@ class EEGViT_raw(nn.Module):
         x=self.ViT(x).pooler_output
         
         return x
-    
-
-
-
-    
